@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+    {{ user.email }}<br>
+    {% for order in orders %}
+    {{ order.user.id }}---{{ order.product.name }}<br>
+{% endfor %}
+{% endblock %}

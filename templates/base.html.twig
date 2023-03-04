@@ -6,6 +6,7 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <style>
                 .c{
                     margin-top: 150px;
@@ -16,6 +17,9 @@
                     margin-top: 50px;
                     margin-left: auto;
                     margin-right: auto
+                }
+                .b{
+                    margin-left: 50px;
                 }
             </style>
             {{ encore_entry_link_tags('app') }}
@@ -54,17 +58,19 @@
                     {% if is_granted('ROLE_USER') %}
                         <button onclick="location.href='/logout'" type="button" class="btn btn-outline-light me-2">Logout</button>
                     {% else %}
-                        <button onclick="location.href='login'" type="button" class="btn btn-outline-light me-2">Login</button>
-                        <button onclick="location.href='register'" type="button" class="btn btn-warning">Sign-up</button>
+                        <button onclick="location.href='/login'" type="button" class="btn btn-outline-light me-2">Login</button>
+                        <button onclick="location.href='/register'" type="button" class="btn btn-warning">Sign-up</button>
                     {% endif %}
+
 {#                    <button onclick="location.href='/login'" type="button" class="btn btn-outline-light me-2">Login</button>#}
 {#                    <button type="button" class="btn btn-warning">Sign-up</button>#}
                 </div>
+                <a href="{{ path('myOrders') }}"><i class="fa fa-shopping-basket b" style="font-size:30px; color: #dbeafe"></i></a>
             </div>
         </div>
     </header>
     {% block body %}
-    <main>
+{#    <main>#}
 
         <section class="py-5 text-center container tr">
             <div class="row py-lg-5">
@@ -88,59 +94,21 @@
                             <i class= '{{section.image}}' style='font-size:100px;color:black'></i>
 {#                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>#}
                             <div class="card-body">
-{#                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
+                                <p class="card-text">{{section.name}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-{#                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
+                                        <button onclick="location.href = '/product/{{ section.id }}'" type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
-{#                    <div class="col">#}
-{#                        <div class="card shadow-sm">#}
-{#                            <i class='fas fa-socks t' style='font-size:100px; color: black'></i>#}
-{#                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>#}
-{#                            <div class="card-body">#}
-{#                                <div class="d-flex justify-content-between align-items-center">#}
-{#                                    <div class="btn-group">#}
-{#                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col">#}
-{#                        <div class="card shadow-sm">#}
-{#                            <i class='fas fa-hat-cowboy t' style='font-size:100px; color: black'></i>#}
-{#                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>#}
-{#                            <div class="card-body">#}
-{#                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
-{#                                <div class="d-flex justify-content-between align-items-center">#}
-{#                                    <div class="btn-group">#}
-{#                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>#}
-{#                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
-{#                                    </div>#}
-{#                                    <small class="text-muted">9 mins</small>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
                             </div>
                         </div>
                     </div>
-    </main>
+{#    </main>#}
     {% endblock %}
-    <footer class="text-muted py-5">
-        <div class="container">
-            <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-            <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
-        </div>
-    </footer>
-
-
     <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
     </body>
